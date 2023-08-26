@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 300.0,
+        toolbarHeight: 215.0,
         backgroundColor: Colors.white,
         flexibleSpace: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomAppBar(
         color: Color.fromARGB(255, 2, 40, 72),
         child: Container(
-          height: 56.0,
+          height: 40.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -168,16 +168,21 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildProductCategories() {
     return Container(
-      color: const Color.fromARGB(255, 118, 185, 239),
+      color: Color.fromARGB(255, 2, 40, 72),
       padding: EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _buildProductCategory(index: 0, name: "All Products"),
-          _buildProductCategory(index: 1, name: "Gamer"),
-          _buildProductCategory(index: 2, name: "Network"),
-          _buildProductCategory(index: 3, name: "Hardware"),
-        ],
+      width: double.infinity, // Para ocupar a largura total da tela
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment:
+              MainAxisAlignment.start, // Alinha os itens à esquerda
+          children: [
+            _buildProductCategory(index: 0, name: "All Products"),
+            _buildProductCategory(index: 1, name: "Gamer"),
+            _buildProductCategory(index: 2, name: "Network"),
+            _buildProductCategory(index: 3, name: "Hardware"),
+          ],
+        ),
       ),
     );
   }
@@ -190,10 +195,8 @@ class _HomePageState extends State<HomePage> {
         });
       },
       child: Container(
-        width: 100,
-        height: 40,
-        margin: const EdgeInsets.only(top: 10, left: 10),
-        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(
+            horizontal: 10.0, vertical: 8.0), // Adicionei o padding vertical
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 118, 185, 239),
           borderRadius: BorderRadius.circular(8),
