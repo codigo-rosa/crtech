@@ -1,15 +1,16 @@
-import 'package:ecommerce_app/models/my_product.dart';
-import 'package:ecommerce_app/widgets/product_card.dart';
+import 'package:ecommerce_app/models/meusProdutos.dart';
+import 'package:ecommerce_app/main.dart';
+import 'package:ecommerce_app/widgets/produtoCard.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class TelaHome extends StatefulWidget {
+  const TelaHome({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<TelaHome> createState() => EstadoTelaHome();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class EstadoTelaHome extends State<TelaHome> {
   int isSelected = 0;
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           const Text(
-            "Our Products",
+            "Nossos Produtos",
             style: TextStyle(
               fontSize: 27,
               fontWeight: FontWeight.bold,
@@ -27,10 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildProductCategory(index: 0, name: "Todos produtos"),
-              _buildProductCategory(index: 1, name: "Gamer"),
-              _buildProductCategory(index: 2, name: "Network"),
-              _buildProductCategory(index: 3, name: "Harware"),
+              construirCategoriasDeProdutos(index: 0, nome: "Todos produtos"),
+              construirCategoriasDeProdutos(index: 1, nome: "Gamer"),
+              construirCategoriasDeProdutos(index: 2, nome: "Rede"),
+              construirCategoriasDeProdutos(index: 3, nome: "Harware"),
             ],
           ),
           const SizedBox(
@@ -38,19 +39,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
           Expanded(
             child: isSelected == 0
-                ? _buildAllProducts()
+                ? construirTodosOsProdutos()
                 : isSelected == 1
-                    ? _buildGamer()
+                    ? construirGamer()
                     : isSelected == 2
-                        ? _buildNetwork()
-                        : _buildHardware(),
+                        ? construirRede()
+                        : construirHardware(),
           ),
         ],
       ),
     );
   }
 
-  _buildProductCategory({required int index, required String name}) =>
+  construirCategoriasDeProdutos({required int index, required String nome}) =>
       GestureDetector(
         onTap: () => setState(() => isSelected = index),
         child: Container(
@@ -64,13 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   : Color.fromARGB(255, 26, 6, 62),
               borderRadius: BorderRadius.circular(8)),
           child: Text(
-            name,
+            nome,
             style: const TextStyle(color: Colors.white),
           ),
         ),
       );
 
-  _buildAllProducts() => GridView.builder(
+  construirTodosOsProdutos() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: (100 / 140),
@@ -78,14 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSpacing: 12,
         ),
         scrollDirection: Axis.vertical,
-        itemCount: MyProducts.allProducts.length,
+        itemCount: MeusProdutos.todosProdutos.length,
         itemBuilder: (context, index) {
-          final allProducts = MyProducts.allProducts[index];
-          return ProductCard(product: allProducts);
+          final todosProdutos = MeusProdutos.todosProdutos[index];
+          return ProdutoCard(produtos: todosProdutos);
         },
       );
 
-  _buildGamer() => GridView.builder(
+  construirGamer() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           childAspectRatio: (100 / 140),
@@ -93,14 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSpacing: 12,
         ),
         scrollDirection: Axis.vertical,
-        itemCount: MyProducts.gamerList.length,
+        itemCount: MeusProdutos.listaGamer.length,
         itemBuilder: (context, index) {
-          final gamerList = MyProducts.gamerList[index];
-          return ProductCard(product: gamerList);
+          final listaGamer = MeusProdutos.listaGamer[index];
+          return ProdutoCard(produtos: listaGamer);
         },
       );
 
-  _buildHardware() => GridView.builder(
+  construirHardware() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           childAspectRatio: (50 / 70),
@@ -108,14 +109,14 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSpacing: 12,
         ),
         scrollDirection: Axis.vertical,
-        itemCount: MyProducts.hardwareList.length,
+        itemCount: MeusProdutos.listaDeHardware.length,
         itemBuilder: (context, index) {
-          final hardwareList = MyProducts.hardwareList[index];
-          return ProductCard(product: hardwareList);
+          final listaDeHardware = MeusProdutos.listaDeHardware[index];
+          return ProdutoCard(produtos: listaDeHardware);
         },
       );
 
-  _buildNetwork() => GridView.builder(
+  construirRede() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           childAspectRatio: (30 / 30),
@@ -123,10 +124,10 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSpacing: 12,
         ),
         scrollDirection: Axis.vertical,
-        itemCount: MyProducts.networkList.length,
+        itemCount: MeusProdutos.listaDeRede.length,
         itemBuilder: (context, index) {
-          final networkList = MyProducts.networkList[index];
-          return ProductCard(product: networkList);
+          final listaDeRede = MeusProdutos.listaDeRede[index];
+          return ProdutoCard(produtos: listaDeRede);
         },
       );
 }
