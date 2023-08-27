@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'E-Commerce Shop',
+      debugShowCheckedModeBanner: false, // Remover o banner de debug
       theme: ThemeData(
         scaffoldBackgroundColor: Color.fromARGB(255, 2, 40, 72),
       ),
@@ -198,13 +199,13 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.symmetric(
             horizontal: 10.0, vertical: 8.0), // Adicionei o padding vertical
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 118, 185, 239),
-          borderRadius: BorderRadius.circular(8),
+          color: Color.fromARGB(255, 2, 40, 72),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
           name,
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
@@ -234,7 +235,7 @@ class _HomePageState extends State<HomePage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side: BorderSide(
-          color: Colors.white,
+          color: Colors.pink,
           width: 1.0,
         ),
       ),
@@ -268,7 +269,7 @@ class _HomePageState extends State<HomePage> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
