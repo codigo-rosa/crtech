@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/TelaPerfil.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/models/produtos.dart';
 import 'package:ecommerce_app/models/meusProdutos.dart';
@@ -145,7 +146,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Aplicativo(),
+                      builder: (context) => TelaPerfil(),
                     ),
                   );
                 },
