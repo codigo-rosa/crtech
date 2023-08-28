@@ -1,42 +1,44 @@
+import 'package:ecommerce_app/TelaPerfil.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/models/product.dart';
-import 'package:ecommerce_app/widgets/product_card.dart';
-import 'package:ecommerce_app/models/my_product.dart';
+import 'package:ecommerce_app/models/produtos.dart';
+import 'package:ecommerce_app/models/meusProdutos.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Aplicativo());
 }
 
-class MyApp extends StatelessWidget {
+class Aplicativo extends StatelessWidget {
+  const Aplicativo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'E-Commerce Shop',
+      title: 'CR Tech',
       debugShowCheckedModeBanner: false, // Remover o banner de debug
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromARGB(255, 2, 40, 72),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 2, 40, 72),
       ),
-      home: const HomePage(),
+      home: const PaginaPrincipal(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class PaginaPrincipal extends StatefulWidget {
+  const PaginaPrincipal({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  EstadoPaginaPrincipal createState() => EstadoPaginaPrincipal();
 }
 
-class _HomePageState extends State<HomePage> {
+class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   int isSelected = 0;
   String searchText = "";
-  List<Product> productList = MyProducts.allProducts;
+  List<Produtos> listaDeProdutos = MeusProdutos.todosProdutos;
 
   @override
   Widget build(BuildContext context) {
-    List<Product> filteredProducts = productList.where((product) {
-      return product.description
+    List<Produtos> produtosfiltrados = listaDeProdutos.where((produtos) {
+      return produtos.descricao
           .toLowerCase()
           .contains(searchText.toLowerCase());
     }).toList();
@@ -55,13 +57,13 @@ class _HomePageState extends State<HomePage> {
               height: 90.0,
             ),
 
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: EdgeInsets.only(left: 20.0),
                     child: Text(
                       'Olá usuário',
                       style: TextStyle(
@@ -72,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 8.0), // Espaçamento entre os textos
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: EdgeInsets.only(left: 20.0),
                     child: Text(
                       'O que está procurando hoje?',
                       style: TextStyle(
@@ -86,14 +88,14 @@ class _HomePageState extends State<HomePage> {
             Container(
               color: const Color.fromARGB(
                   255, 255, 255, 255), // Cor de fundo da barra
-              padding: EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Container(
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: TextField(
                         onChanged: (text) {
                           setState(() {
@@ -102,10 +104,10 @@ class _HomePageState extends State<HomePage> {
                         },
                         decoration: InputDecoration(
                           hintText: 'Digite aqui para buscar',
-                          prefixIcon: Icon(Icons.search),
+                          prefixIcon: const Icon(Icons.search),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0),
-                            borderSide: BorderSide(color: Colors.white),
+                            borderSide: const BorderSide(color: Colors.white),
                           ),
                         ),
                       ),
@@ -114,33 +116,39 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 5.0), // Espaço abaixo da barra de busca
+            const SizedBox(height: 5.0), // Espaço abaixo da barra de busca
           ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(255, 2, 40, 72),
-        child: Container(
+        color: const Color.fromARGB(255, 2, 40, 72),
+        child: SizedBox(
           height: 40.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                icon: Icon(Icons.home, color: Colors.pink),
+                icon: const Icon(Icons.home, color: Colors.pink),
                 onPressed: () {
                   // Lógica ao pressionar o ícone de home
                 },
               ),
               IconButton(
-                icon: Icon(Icons.shopping_cart, color: Colors.pink),
+                icon: const Icon(Icons.shopping_cart, color: Colors.pink),
                 onPressed: () {
                   // Lógica ao pressionar o ícone de carrinho de compras
                 },
               ),
               IconButton(
-                icon: Icon(Icons.person, color: Colors.pink),
+                icon: const Icon(Icons.person, color: Colors.pink),
                 onPressed: () {
                   // Lógica ao pressionar o ícone de perfil
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelaPerfil(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -151,15 +159,16 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
         child: Column(
           children: [
-            _buildProductCategories(),
+            construirCategoriasDeProdutos(),
             Expanded(
               child: isSelected == 0
-                  ? _buildFilteredProducts(filteredProducts)
+                  ? construirProdutosFiltrados(MeusProdutos.todosProdutos)
                   : isSelected == 1
-                      ? _buildFilteredProducts(MyProducts.gamerList)
+                      ? construirProdutosFiltrados(MeusProdutos.listaGamer)
                       : isSelected == 2
-                          ? _buildFilteredProducts(MyProducts.networkList)
-                          : _buildFilteredProducts(MyProducts.hardwareList),
+                          ? construirProdutosFiltrados(MeusProdutos.listaDeRede)
+                          : construirProdutosFiltrados(
+                              MeusProdutos.listaDeHardware),
             ),
           ],
         ),
@@ -167,10 +176,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildProductCategories() {
+  Widget construirCategoriasDeProdutos() {
     return Container(
-      color: Color.fromARGB(255, 2, 40, 72),
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+      color: const Color.fromARGB(255, 2, 40, 72),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity, // Para ocupar a largura total da tela
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -178,17 +187,18 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment:
               MainAxisAlignment.start, // Alinha os itens à esquerda
           children: [
-            _buildProductCategory(index: 0, name: "All Products"),
-            _buildProductCategory(index: 1, name: "Gamer"),
-            _buildProductCategory(index: 2, name: "Network"),
-            _buildProductCategory(index: 3, name: "Hardware"),
+            construirCategoriaDeProdutos(index: 0, nome: "Todos os Produtos"),
+            construirCategoriaDeProdutos(index: 1, nome: "Gamer"),
+            construirCategoriaDeProdutos(index: 2, nome: "Rede"),
+            construirCategoriaDeProdutos(index: 3, nome: "Hardware"),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildProductCategory({required int index, required String name}) {
+  Widget construirCategoriaDeProdutos(
+      {required int index, required String nome}) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -196,15 +206,15 @@ class _HomePageState extends State<HomePage> {
         });
       },
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
             horizontal: 10.0, vertical: 8.0), // Adicionei o padding vertical
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 2, 40, 72),
+          color: const Color.fromARGB(255, 2, 40, 72),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
-          name,
-          style: TextStyle(
+          nome,
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -212,29 +222,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildFilteredProducts(List<Product> productList) {
+  Widget construirProdutosFiltrados(List<Produtos> listaDeProdutos) {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
         mainAxisSpacing: 20,
         crossAxisSpacing: 20,
         childAspectRatio: 3 / 3,
       ),
-      itemCount: productList.length,
+      itemCount: listaDeProdutos.length,
       itemBuilder: (context, index) {
-        final product = productList[index];
-        return _buildProductCard(product);
+        final produtos = listaDeProdutos[index];
+        return construirCardDeProdutos(produtos);
       },
     );
   }
 
-  Widget _buildProductCard(Product product) {
+  Widget construirCardDeProdutos(Produtos produtos) {
     return Card(
       elevation: 2.0,
       color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(
+        side: const BorderSide(
           color: Colors.pink,
           width: 1.0,
         ),
@@ -244,24 +254,24 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: Image.asset(
-              product.image,
+              produtos.imagem,
               fit: BoxFit.contain,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
-            product.description,
-            style: TextStyle(
+            produtos.descricao,
+            style: const TextStyle(
               fontFamily: 'Roboto',
               fontSize: 13,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
-            product.price,
-            style: TextStyle(
+            produtos.preco,
+            style: const TextStyle(
               fontFamily: 'Roboto',
               fontSize: 13,
               color: Colors.black26,
@@ -269,7 +279,7 @@ class _HomePageState extends State<HomePage> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
@@ -279,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: Text('Adicionar ao Carrinho'),
+            child: const Text('Adicionar ao Carrinho'),
           ),
         ],
       ),

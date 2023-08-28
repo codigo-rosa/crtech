@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
+import '../models/produtos.dart';
 
-class ProductCard extends StatefulWidget {
-  final Product product;
+class ProdutoCard extends StatefulWidget {
+  final Produtos produtos;
 
-  const ProductCard({super.key, required this.product});
+  const ProdutoCard({super.key, required this.produtos});
 
   @override
-  State<ProductCard> createState() => _ProductCardState();
+  State<ProdutoCard> createState() => EstadoDoProdutoCard();
 }
 
-class _ProductCardState extends State<ProductCard> {
+class EstadoDoProdutoCard extends State<ProdutoCard> {
   @override
   Widget build(BuildContext contex) {
     return Container(
@@ -21,7 +21,7 @@ class _ProductCardState extends State<ProductCard> {
       ),
       child: Column(
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Icon(
@@ -34,26 +34,26 @@ class _ProductCardState extends State<ProductCard> {
             height: 130,
             width: 130,
             child: Image.asset(
-              widget.product.image,
+              widget.produtos.imagem,
               fit: BoxFit.cover,
             ),
           ),
           Text(
-            widget.product.name,
+            widget.produtos.nome,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            widget.product.name,
+            widget.produtos.nome,
             style: const TextStyle(
               fontSize: 14,
               color: Colors.pink,
             ),
           ),
           Text(
-            '\$' '${widget.product.price}',
+            '\$' '${widget.produtos.preco}',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
