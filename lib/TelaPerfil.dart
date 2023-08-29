@@ -83,12 +83,7 @@ class TelaPerfil extends StatelessWidget {
                       emailController.clear();
 
                       // Navega para a página principal
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Aplicativo()), // Substitua "HomePage" pela classe da sua página principal
-                      );
+                     Navigator.pushNamed(context, '/');
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromARGB(255, 2, 40, 72), // Cor do botão
