@@ -66,6 +66,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   String searchText = "";
   List<Produtos> listaDeProdutos = MeusProdutos.todosProdutos;
 
+
   @override
   Widget build(BuildContext context) {
     List<Produtos> produtosfiltrados = listaDeProdutos.where((produtos) {
@@ -212,18 +213,23 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           const SizedBox(height: 4),
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                alignment: Alignment.center,
-                backgroundColor: const Color.fromRGBO(236, 33, 99, 1),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {});
+              },
+              child: TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  alignment: Alignment.center,
+                  backgroundColor: const Color.fromRGBO(236, 33, 99, 1),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
+                child: const Text('Adicionar ao Carrinho',
+                    textAlign: TextAlign.center),
               ),
-              child: const Text('Adicionar ao Carrinho',
-                  textAlign: TextAlign.center),
             ),
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/models/produtos.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -110,15 +111,6 @@ class CartHeader extends StatelessWidget {
   }
 }
 
-class Product {
-  String? name;
-  String? description;
-  double? price;
-  String? image;
-
-  Product({this.name, this.description, this.price, this.image});
-}
-
 class CartProductsList extends StatefulWidget {
   const CartProductsList({super.key});
 
@@ -127,44 +119,50 @@ class CartProductsList extends StatefulWidget {
 }
 
 class CartProductsPrice {
-  static double price = _CartProductListState()
-      .products
-      .fold<double>(0, (sum, item) => sum + item.price!.toDouble());
+  static double price = _CartProductListState()._products.fold<double>(
+      0, (sum, item) => sum + double.parse(item.preco).toDouble());
 }
 
 class _CartProductListState extends State<CartProductsList> {
-  List<Product> products = [
-    Product(
-        name: 'Memória HyperX Fury 8GB DDR4 2666Mhz',
-        price: 148.80,
-        image:
-            'https://m.media-amazon.com/images/I/61Udx3CqBtL._AC_UF894,1000_QL80_.jpg'),
-    Product(
-        name: 'Placa Mãe Gigabyte B550M Aorus Elite',
-        price: 779.99,
-        image: 'https://m.media-amazon.com/images/I/71d1iiTDIYL.jpg')
-  ];
+  List<Produtos> _products = [];
+
+  void _addProduct(produto) {
+    setState(() {
+      _products.add(produto);
+    });
+  }
+
+  void _removeProduct(produto) {
+    setState(() {
+      _products.remove(produto);
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListView.builder(
-            itemCount: products.length,
+            itemCount: _products.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return Flexible(
                   child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Card(
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Wrap(
                       children: [
                         Row(
                           children: [
                             Image.network(
-                              products[index].image.toString(),
+                              _products[index].imagem.toString(),
                               width: 100,
                             ),
                             Expanded(
@@ -175,7 +173,7 @@ class _CartProductListState extends State<CartProductsList> {
                                     child: Align(
                                         alignment: Alignment.centerRight,
                                         child: Text(
-                                            products[index].name.toString(),
+                                            _products[index].nome.toString(),
                                             style: const TextStyle(
                                               overflow: TextOverflow.clip,
                                             ),
@@ -190,7 +188,7 @@ class _CartProductListState extends State<CartProductsList> {
                                           NumberFormat.compactSimpleCurrency(
                                                   locale: 'pt-BR',
                                                   decimalDigits: 2)
-                                              .format(products[index].price),
+                                              .format(_products[index].preco),
                                           textAlign: TextAlign.right,
                                         )
                                       ],
