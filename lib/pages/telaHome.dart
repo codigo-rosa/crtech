@@ -11,7 +11,7 @@ class TelaHome extends StatefulWidget {
 }
 
 class EstadoTelaHome extends State<TelaHome> {
-  int isSelected = 0;
+  int isSelected = 0; // Esta variável controla a categoria selecionada
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -53,7 +53,8 @@ class EstadoTelaHome extends State<TelaHome> {
 
   construirCategoriasDeProdutos({required int index, required String nome}) =>
       GestureDetector(
-        onTap: () => setState(() => isSelected = index),
+        onTap: () => setState(
+            () => isSelected = index), // Atualiza a categoria selecionada
         child: Container(
           width: 100,
           height: 40,
@@ -61,7 +62,7 @@ class EstadoTelaHome extends State<TelaHome> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: isSelected == index
-                  ? Color.fromARGB(255, 19, 9, 75)
+                  ? Color.fromARGB(255, 252, 251, 255)
                   : Color.fromARGB(255, 26, 6, 62),
               borderRadius: BorderRadius.circular(8)),
           child: Text(

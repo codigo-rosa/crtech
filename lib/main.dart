@@ -1,4 +1,6 @@
 import 'package:ecommerce_app/TelaPerfil.dart';
+import 'package:ecommerce_app/pages/TelaAbertura.dart';
+import 'package:ecommerce_app/pages/TelaCarrinho.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/models/produtos.dart';
 import 'package:ecommerce_app/models/meusProdutos.dart';
@@ -8,23 +10,23 @@ void main() {
 }
 
 class Aplicativo extends StatelessWidget {
-  const Aplicativo({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CR Tech',
       debugShowCheckedModeBanner: false, // Remover o banner de debug
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 2, 40, 72),
+        scaffoldBackgroundColor: Color.fromARGB(255, 245, 246, 247),
       ),
-      home: const PaginaPrincipal(),
+      home: const TelaAbertura(),
     );
   }
 }
 
 class PaginaPrincipal extends StatefulWidget {
-  const PaginaPrincipal({Key? key}) : super(key: key);
+  final List<Produtos> carrinho;
+
+  const PaginaPrincipal({Key? key, required this.carrinho}) : super(key: key);
 
   @override
   EstadoPaginaPrincipal createState() => EstadoPaginaPrincipal();
@@ -32,12 +34,17 @@ class PaginaPrincipal extends StatefulWidget {
 
 class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   int isSelected = 0;
-  String searchText = "";
+  String searchText = ""; // Variável para armazenar o texto de busca
   List<Produtos> listaDeProdutos = MeusProdutos.todosProdutos;
+  List<Produtos> produtosFiltrados =
+      []; // Lista para armazenar produtos filtrados
+  List<Produtos> carrinho = []; // Declarar a lista carrinho aqui
 
   @override
   Widget build(BuildContext context) {
-    List<Produtos> produtosfiltrados = listaDeProdutos.where((produtos) {
+    //TEXTOOO
+    // Filtrar a lista de produtos com base no texto de busca
+    produtosFiltrados = listaDeProdutos.where((produtos) {
       return produtos.descricao
           .toLowerCase()
           .contains(searchText.toLowerCase());
@@ -116,12 +123,12 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 ],
               ),
             ),
-            const SizedBox(height: 5.0), // Espaço abaixo da barra de busca
+            const SizedBox(height: 4.0), // Espaço abaixo da barra de busca
           ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 2, 40, 72),
+        color: Color.fromARGB(255, 11, 11, 11),
         child: SizedBox(
           height: 40.0,
           child: Row(
@@ -134,9 +141,15 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.shopping_cart, color: Colors.pink),
+                icon: const Icon(Icons.shopping_cart,
+                    color: Colors.pink), // Use o ícone de carrinho
                 onPressed: () {
-                  // Lógica ao pressionar o ícone de carrinho de compras
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelaCarrinho(carrinho: carrinho),
+                    ),
+                  );
                 },
               ),
               IconButton(
@@ -154,87 +167,18 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             ],
           ),
         ),
-      ),
+      ), //CATEGORIAS
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
         child: Column(
           children: [
-            construirCategoriasDeProdutos(),
+            construirCategoriasDeProdutos(), //FUNCAO
             Expanded(
-              child: isSelected == 0
-                  ? construirProdutosFiltrados(MeusProdutos.todosProdutos)
-                  : isSelected == 1
-                      ? construirProdutosFiltrados(MeusProdutos.listaGamer)
-                      : isSelected == 2
-                          ? construirProdutosFiltrados(MeusProdutos.listaDeRede)
-                          : construirProdutosFiltrados(
-                              MeusProdutos.listaDeHardware),
+              child: construirProdutosExibidos(),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget construirCategoriasDeProdutos() {
-    return Container(
-      color: const Color.fromARGB(255, 2, 40, 72),
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      width: double.infinity, // Para ocupar a largura total da tela
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.start, // Alinha os itens à esquerda
-          children: [
-            construirCategoriaDeProdutos(index: 0, nome: "Todos os Produtos"),
-            construirCategoriaDeProdutos(index: 1, nome: "Gamer"),
-            construirCategoriaDeProdutos(index: 2, nome: "Rede"),
-            construirCategoriaDeProdutos(index: 3, nome: "Hardware"),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget construirCategoriaDeProdutos(
-      {required int index, required String nome}) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isSelected = index;
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 10.0, vertical: 8.0), // Adicionei o padding vertical
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 2, 40, 72),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          nome,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget construirProdutosFiltrados(List<Produtos> listaDeProdutos) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-        childAspectRatio: 3 / 3,
-      ),
-      itemCount: listaDeProdutos.length,
-      itemBuilder: (context, index) {
-        final produtos = listaDeProdutos[index];
-        return construirCardDeProdutos(produtos);
-      },
     );
   }
 
@@ -245,7 +189,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side: const BorderSide(
-          color: Colors.pink,
+          color: Color.fromARGB(255, 247, 235, 239),
           width: 1.0,
         ),
       ),
@@ -281,7 +225,12 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           ),
           const SizedBox(height: 10),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                carrinho.add(produtos); // Adicionar o produto ao carrinho
+              });
+              mostrarModalConfirmacao(context);
+            },
             style: ElevatedButton.styleFrom(
               primary: Colors.pink,
               onPrimary: Colors.black,
@@ -293,6 +242,84 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget construirCategoriasDeProdutos() {
+    return Container(
+      color: Color.fromARGB(255, 10, 10, 10),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      width: double.infinity, // Para ocupar a largura total da tela
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment:
+              MainAxisAlignment.start, // Alinha os itens à esquerda
+          children: [
+            construirCategoriaDeProdutos(index: 0, nome: "Todos os Produtos"),
+            construirCategoriaDeProdutos(index: 1, nome: "Gamer"),
+            construirCategoriaDeProdutos(index: 2, nome: "Rede"),
+            construirCategoriaDeProdutos(index: 3, nome: "Hardware"),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget construirCategoriaDeProdutos({
+    required int index,
+    required String nome,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isSelected = index;
+          searchText = "";
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 10, 10, 10),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Text(
+          nome,
+          style: const TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget construirProdutosExibidos() {
+    List<Produtos> produtosExibidos;
+
+    if (isSelected == 0) {
+      produtosExibidos = produtosFiltrados;
+    } else if (isSelected == 1) {
+      produtosExibidos = MeusProdutos.listaGamer;
+    } else if (isSelected == 2) {
+      produtosExibidos = MeusProdutos.listaDeRede;
+    } else if (isSelected == 3) {
+      produtosExibidos = MeusProdutos.listaDeHardware;
+    } else {
+      produtosExibidos = [];
+    }
+
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+        childAspectRatio: 3 / 3,
+      ),
+      itemCount: produtosExibidos.length,
+      itemBuilder: (context, index) {
+        final produtos = produtosExibidos[index];
+        return construirCardDeProdutos(produtos);
+      },
     );
   }
 }
