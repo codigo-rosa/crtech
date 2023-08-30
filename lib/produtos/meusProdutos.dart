@@ -1,4 +1,4 @@
-import 'produtos.dart';
+import 'package:crtech/produtos/produtos.dart';
 
 class MeusProdutos {
   static List<Produtos> todosProdutos = [
@@ -156,127 +156,31 @@ class MeusProdutos {
   static List<Produtos> listaDeHardware = [
     Produtos(
       id: 1,
-      nome: "Gabinete Gamer Mancer Narok",
-      preco: '249.90',
-      imagem: 'assets/hardware/gabinete_gamer.png',
+      nome: "Placa Mãe Gigabyte B550M AORUS Elite",
+      preco: '739.90',
+      imagem: "assets/hardware/placa_mae02.jpg",
       descricao:
-          "Gabinete Gamer Mancer Narok, Rainbow, Mid-Tower, Lateral de Vidro, Com 3 Fans, Preto, MCR-NRK-RGB01",
+          "Placa Mãe Gigabyte B550M AORUS Elite, Chipset B550, AMD AM4, mATX, DDR4",
       quantidade: 1,
     ),
     Produtos(
       id: 2,
-      nome: "Gabinete Gamer BPC-C3147",
-      preco: '199.90',
-      imagem: 'assets/hardware/gabinete_gamer01.jpg',
-      descricao: "Gabinete Gamer BPC-C3147, Preto com lateral de vidro",
+      nome: "Placa Mãe Intel H310",
+      preco: '649.90',
+      imagem: "assets/hardware/placa_mae01.jpg",
+      descricao: "Placa Mãe Intel, Intel H310, LGA 1151, DDR4",
       quantidade: 1,
     ),
     Produtos(
       id: 3,
-      nome: "Gabinete Gamer Pichau Pouter",
-      preco: '349.90',
-      imagem: 'assets/hardware/gabinete_gamer02.jpg',
-      descricao:
-          "Gabinete Gamer Pichau Pouter 3 RGB Preto, com lateral de vidro, PG-P03-RGB",
+      nome: "Placa Mãe Asus",
+      preco: '319.90',
+      imagem: "assets/hardware/placa_mae.jpg",
+      descricao: "Placa Mãe Asus TUF B360M-PLUS Gaming/BR",
       quantidade: 1,
     ),
     Produtos(
       id: 4,
-      nome: "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 Super",
-      preco: '2449.90',
-      imagem: 'assets/hardware/placa_video.png',
-      descricao:
-          "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 Super, 6GB GDDR6, 192 Bits - 60SRL7DSY91S",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 5,
-      nome: "Placa de Vídeo Galax NVIDIA GeForce RTX 30 Series ",
-      preco: '1529.90',
-      imagem: "assets/hardware/placa_video01.png",
-      descricao:
-          "Placa de Vídeo Galax NVIDIA GeForce RTX 30 Series, RTX 3050 35NSL8MD6YEX 8GB",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 6,
-      nome: "Placa de Vídeo Quadro Nvidia T600",
-      preco: '1789.00',
-      imagem: "assets/hardware/placa_video02.png",
-      descricao: "Placa de Vídeo Quadro Nvidia T600 4GB DDR6 128Bits",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 7,
-      nome: "Memória Desktop Crucial Basics",
-      preco: '119.90',
-      imagem: "assets/hardware/memoria_desktop.png",
-      descricao:
-          "Memória Desktop Crucial Basics, 8GB, 2666MHz, DDR4, CL19 - CB8GU2666",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 8,
-      nome: "Memória Desktop Kingston Fury Beast",
-      preco: '289.90',
-      imagem: "assets/hardware/memoria_desktop01.png",
-      descricao:
-          "Memória Desktop Kingston Fury Beast, 16GB, 3200MHz, DDR4, CL16 - KF432C16BB1/16",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 9,
-      nome: "Memória Desktop Oxy Gamer",
-      preco: '379.90',
-      imagem: "assets/hardware/memoria_desktop02.png",
-      descricao:
-          "Memoria Desktop Oxy Gamer, 8GB, 3200MHz, DDR4, CL22 - OXYGAMER32N22S8/8",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 10,
-      nome: "SSD Externo Portátil Sandisk Extreme 1TB",
-      preco: '669.90',
-      imagem: "assets/hardware/ssd_externo.png",
-      descricao: "SSD Externo Portátil Sandisk Extreme 1TB, SDSSDE60-1T00-G2",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 11,
-      nome: "SSD Externo Portátil Kingston, 2TB",
-      preco: '1099.90',
-      imagem: "assets/hardware/ssd_externo01.png",
-      descricao: "SSD Externo Portátil Kingston, 2TB, XS2000",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 12,
-      nome: "SSD Externo Portátil Sandisk Extreme 2TB",
-      preco: '939.90',
-      imagem: "assets/hardware/ssd_externo02.png",
-      descricao: "SSD Externo Portátil Sandisk Extreme 2TB, SDSSDE61-2T00-G25",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 13,
-      nome: "Cooler para Processador - Master Hyper, LED, Turbo White",
-      preco: '219.90',
-      imagem: "assets/hardware/cooler_processador.png",
-      descricao:
-          "Cooler para Processador Cooler Master Hyper 212 LED Turbo White Edition, LED, AMD/Intel - RR-212TW-16PW-R1",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 14,
-      nome: "Cooler para Processador - Master Hyper",
-      preco: '149.90',
-      imagem: "assets/hardware/cooler_processador01.jpg",
-      descricao:
-          "Cooler para Processador Cooler Master AMD/ Intel Hyper H412R - RR-H412-20PK-R2",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 15,
       nome: "Cooler para Processador - Master Hyper, Black Edition",
       preco: '319.90',
       imagem: "assets/hardware/cooler_processador02.jpg",
@@ -285,28 +189,115 @@ class MeusProdutos {
       quantidade: 1,
     ),
     Produtos(
-      id: 16,
-      nome: "Placa Mãe Asus",
-      preco: '319.90',
-      imagem: "assets/hardware/placa_mae.jpg",
-      descricao: "Placa Mãe Asus TUF B360M-PLUS Gaming/BR",
+      id: 5,
+      nome: "Cooler para Processador - Master Hyper",
+      preco: '149.90',
+      imagem: "assets/hardware/cooler_processador01.jpg",
+      descricao:
+          "Cooler para Processador Cooler Master AMD/ Intel Hyper H412R - RR-H412-20PK-R2",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 6,
+      nome: "SSD Externo Portátil Sandisk Extreme 2TB",
+      preco: '939.90',
+      imagem: "assets/hardware/ssd_externo02.png",
+      descricao: "SSD Externo Portátil Sandisk Extreme 2TB, SDSSDE61-2T00-G25",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 7,
+      nome: "SSD Externo Portátil Kingston, 2TB",
+      preco: '1099.90',
+      imagem: "assets/hardware/ssd_externo01.png",
+      descricao: "SSD Externo Portátil Kingston, 2TB, XS2000",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 8,
+      nome: "SSD Externo Portátil Sandisk Extreme 1TB",
+      preco: '669.90',
+      imagem: "assets/hardware/ssd_externo.png",
+      descricao: "SSD Externo Portátil Sandisk Extreme 1TB, SDSSDE60-1T00-G2",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 9,
+      nome: "Gabinete Gamer Mancer Narok",
+      preco: '249.90',
+      imagem: 'assets/hardware/gabinete_gamer.png',
+      descricao:
+          "Gabinete Gamer Mancer Narok, Rainbow, Mid-Tower, Lateral de Vidro, Com 3 Fans, Preto, MCR-NRK-RGB01",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 10,
+      nome: "Gabinete Gamer BPC-C3147",
+      preco: '199.90',
+      imagem: 'assets/hardware/gabinete_gamer01.jpg',
+      descricao: "Gabinete Gamer BPC-C3147, Preto com lateral de vidro",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 11,
+      nome: "Gabinete Gamer Pichau Pouter",
+      preco: '349.90',
+      imagem: 'assets/hardware/gabinete_gamer02.jpg',
+      descricao:
+          "Gabinete Gamer Pichau Pouter 3 RGB Preto, com lateral de vidro, PG-P03-RGB",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 12,
+      nome: "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 Super",
+      preco: '2449.90',
+      imagem: 'assets/hardware/placa_video.png',
+      descricao:
+          "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 Super, 6GB GDDR6, 192 Bits - 60SRL7DSY91S",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 13,
+      nome: "Placa de Vídeo Galax NVIDIA GeForce RTX 30 Series ",
+      preco: '1529.90',
+      imagem: "assets/hardware/placa_video01.png",
+      descricao:
+          "Placa de Vídeo Galax NVIDIA GeForce RTX 30 Series, RTX 3050 35NSL8MD6YEX 8GB",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 14,
+      nome: "Placa de Vídeo Quadro Nvidia T600",
+      preco: '1789.00',
+      imagem: "assets/hardware/placa_video02.png",
+      descricao: "Placa de Vídeo Quadro Nvidia T600 4GB DDR6 128Bits",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 15,
+      nome: "Memória Desktop Crucial Basics",
+      preco: '119.90',
+      imagem: "assets/hardware/memoria_desktop.png",
+      descricao:
+          "Memória Desktop Crucial Basics, 8GB, 2666MHz, DDR4, CL19 - CB8GU2666",
+      quantidade: 1,
+    ),
+    Produtos(
+      id: 1,
+      nome: "Memória Desktop Kingston Fury Beast",
+      preco: '289.90',
+      imagem: "assets/hardware/memoria_desktop01.png",
+      descricao:
+          "Memória Desktop Kingston Fury Beast, 16GB, 3200MHz, DDR4, CL16 - KF432C16BB1/16",
       quantidade: 1,
     ),
     Produtos(
       id: 17,
-      nome: "Placa Mãe Intel H310",
-      preco: '649.90',
-      imagem: "assets/hardware/placa_mae01.jpg",
-      descricao: "Placa Mãe Intel, Intel H310, LGA 1151, DDR4",
-      quantidade: 1,
-    ),
-    Produtos(
-      id: 18,
-      nome: "Placa Mãe Gigabyte B550M AORUS Elite",
-      preco: '739.90',
-      imagem: "assets/hardware/placa_mae02.jpg",
+      nome: "Memória Desktop Oxy Gamer",
+      preco: '379.90',
+      imagem: "assets/hardware/memoria_desktop02.png",
       descricao:
-          "Placa Mãe Gigabyte B550M AORUS Elite, Chipset B550, AMD AM4, mATX, DDR4",
+          "Memoria Desktop Oxy Gamer, 8GB, 3200MHz, DDR4, CL22 - OXYGAMER32N22S8/8",
       quantidade: 1,
     ),
   ];

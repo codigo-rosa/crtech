@@ -1,9 +1,10 @@
-import 'package:ecommerce_app/TelaPerfil.dart';
-import 'package:ecommerce_app/pages/TelaAbertura.dart';
-import 'package:ecommerce_app/pages/TelaCarrinho.dart';
+import 'package:crtech/tela/telaPerfil.dart';
+import 'package:crtech/tela/telaAbertura.dart';
+import 'package:crtech/tela/telaCarrinho.dart';
+
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/models/produtos.dart';
-import 'package:ecommerce_app/models/meusProdutos.dart';
+import 'package:crtech/produtos/produtos.dart';
+import 'package:crtech/produtos/meusProdutos.dart';
 
 void main() {
   runApp(Aplicativo());
@@ -16,7 +17,8 @@ class Aplicativo extends StatelessWidget {
       title: 'CR Tech',
       debugShowCheckedModeBanner: false, // Remover o banner de debug
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromARGB(255, 245, 246, 247),
+        scaffoldBackgroundColor: Colors.white,
+        //borderRadius: BorderRadius.circular(8),
       ),
       home: const TelaAbertura(),
     );
@@ -60,8 +62,8 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           children: [
             Image.asset(
               'assets/logo/logo.jpg', // Caminho da imagem
-              width: 90.0,
-              height: 90.0,
+              width: 80.0,
+              height: 80.0,
             ),
 
             const Align(
@@ -72,20 +74,21 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                   Padding(
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      'Olá usuário',
+                      'Olá usuário,',
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 8.0), // Espaçamento entre os textos
+                  SizedBox(height: 2.0), // Espaçamento entre os textos
                   Padding(
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      'O que está procurando hoje?',
+                      'o que está procurando hoje?',
                       style: TextStyle(
                         fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -93,15 +96,14 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               ),
             ),
             Container(
-              color: const Color.fromARGB(
-                  255, 255, 255, 255), // Cor de fundo da barra
+              color: Color.fromRGBO(255, 255, 255, 1), // Cor de fundo da barra
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Container(
-                      color: const Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(255, 249, 247, 247),
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: TextField(
                         onChanged: (text) {
@@ -114,7 +116,9 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                           prefixIcon: const Icon(Icons.search),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0),
-                            borderSide: const BorderSide(color: Colors.white),
+                            borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 249, 247, 247),
+                            ),
                           ),
                         ),
                       ),
@@ -128,21 +132,20 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(255, 11, 11, 11),
+        color: Colors.pink,
         child: SizedBox(
           height: 40.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                icon: const Icon(Icons.home, color: Colors.pink),
-                onPressed: () {
-                  // Lógica ao pressionar o ícone de home
-                },
+                icon: const Icon(Icons.home,
+                    color: Color.fromARGB(255, 10, 10, 10)),
+                onPressed: () {},
               ),
               IconButton(
                 icon: const Icon(Icons.shopping_cart,
-                    color: Colors.pink), // Use o ícone de carrinho
+                    color: Color.fromARGB(255, 10, 10, 10)),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -153,7 +156,8 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.person, color: Colors.pink),
+                icon: const Icon(Icons.person,
+                    color: Color.fromARGB(255, 10, 10, 10)),
                 onPressed: () {
                   // Lógica ao pressionar o ícone de perfil
                   Navigator.push(
@@ -184,25 +188,16 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
 
   Widget construirCardDeProdutos(Produtos produtos) {
     return Card(
-      elevation: 2.0,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        side: const BorderSide(
-          color: Color.fromARGB(255, 247, 235, 239),
-          width: 1.0,
-        ),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Image.asset(
               produtos.imagem,
-              fit: BoxFit.contain,
+              //fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 10),
+          //const SizedBox(height: 10),
           Text(
             produtos.descricao,
             style: const TextStyle(
@@ -218,7 +213,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontSize: 13,
-              color: Colors.black26,
+              color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
@@ -232,13 +227,18 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               mostrarModalConfirmacao(context);
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.pink,
+              primary: Color.fromARGB(255, 240, 238, 239),
               onPrimary: Colors.black,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: const Text('Adicionar ao Carrinho'),
+            child: const Text(
+              'Adicionar ao Carrinho',
+              style: TextStyle(
+                fontSize: 12.0, // Defina o tamanho da fonte desejado),
+              ),
+            ),
           ),
         ],
       ),
@@ -247,7 +247,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
 
   Widget construirCategoriasDeProdutos() {
     return Container(
-      color: Color.fromARGB(255, 10, 10, 10),
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       width: double.infinity, // Para ocupar a largura total da tela
       child: SingleChildScrollView(
@@ -280,13 +280,15 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 10, 10, 10),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
           nome,
           style: const TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Colors.pink,
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

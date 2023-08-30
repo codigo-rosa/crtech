@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/models/produtos.dart';
-import 'package:ecommerce_app/main.dart';
+import 'package:crtech/produtos/produtos.dart';
 
 class TelaCarrinho extends StatefulWidget {
   final List<Produtos> carrinho;
@@ -17,6 +16,7 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Carrinho de Compras'),
+        backgroundColor: Colors.pink, // Cor de fundo pink
       ),
       body: ListView.builder(
         itemCount: widget.carrinho.length,

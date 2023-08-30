@@ -14,3 +14,4 @@ class Produtos {
       required this.imagem,
       required this.quantidade});
 }
+//Faltou implementar quantidade no carrinho e id

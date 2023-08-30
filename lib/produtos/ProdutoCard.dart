@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/models/produtos.dart';
+import 'package:crtech/produtos/produtos.dart';
 import 'package:flutter/material.dart';
 
 class ProdutoCard extends StatefulWidget {

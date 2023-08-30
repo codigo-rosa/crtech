@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/main.dart';
+import 'package:crtech/main.dart';
 //import 'package:ecommerce_app/pages/TelaHome.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class TelaPerfil extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 2, 40, 72),
+        backgroundColor: Colors.pink,
         title: Text('Retornar para página principal'),
       ),
       body: Stack(
@@ -26,7 +26,6 @@ class TelaPerfil extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(255, 109, 182, 1),
                   Color.fromRGBO(253, 207, 230, 1),
                 ],
                 begin: FractionalOffset.bottomCenter,
@@ -91,7 +90,7 @@ class TelaPerfil extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 2, 40, 72), // Cor do botão
+                      primary: Color.fromARGB(255, 13, 13, 13), // Cor do botão
                     ),
                     child: Text(
                       'Entrar',

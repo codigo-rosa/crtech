@@ -1,6 +1,5 @@
-import 'package:ecommerce_app/models/meusProdutos.dart';
-import 'package:ecommerce_app/main.dart';
-import 'package:ecommerce_app/widgets/produtoCard.dart';
+import 'package:crtech/produtos/meusProdutos.dart';
+import 'package:crtech/produtos/produtoCard.dart';
 import 'package:flutter/material.dart';
 
 class TelaHome extends StatefulWidget {

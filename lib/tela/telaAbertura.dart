@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/main.dart';
+import 'package:crtech/main.dart';
 
 class TelaAbertura extends StatefulWidget {
   const TelaAbertura({super.key});
