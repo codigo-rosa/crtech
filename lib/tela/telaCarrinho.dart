@@ -33,18 +33,32 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                 Text('Quantidade: ${produto.quantidade}'),
               ],
             ),
+            trailing: Row(  //propriedade para definir um widget que aparece ao lado dos itens representados
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    //logica para exluir produto do carrinho
+                    setState(() {
+                      widget.carrinho.removeAt(index);
+                    });
+                  },
+                ),
+              ],
+            ),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          mostrarModalConfirmacao(context);
+          mostrarModalExclusao(context);
           setState(() {
             widget.carrinho
                 .clear(); // Limpar a lista de carrinho após a confirmação
           });
         },
-        child: Icon(Icons.check),
+        child: Icon(Icons.clear),
       ), // Chamar a função do modal ao pressionar o botão
     );
   }
@@ -65,7 +79,29 @@ void mostrarModalConfirmacao(BuildContext context) {
             child: Text('OK'),
           ),
         ],
-      );
+      ); 
     },
   );
 }
+
+
+void mostrarModalExclusao(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Produtos removidos'),
+        content: Text(''),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Fechar o modal
+            },
+            child: Text('OK'),
+          ),
+        ],
+      ); 
+    },
+  );
+}
+
