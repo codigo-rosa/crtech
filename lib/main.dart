@@ -17,7 +17,8 @@ class Aplicativo extends StatelessWidget {
       title: 'CR Tech',
       debugShowCheckedModeBanner: false, // Remover o banner de debug
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        primaryColor: Color.fromARGB(255, 214, 139, 164),
+        scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
         //borderRadius: BorderRadius.circular(8),
       ),
       home: const TelaAbertura(),
@@ -132,7 +133,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.pink,
+        color: Theme.of(context).primaryColor,
         child: SizedBox(
           height: 40.0,
           child: Row(
@@ -203,7 +204,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontSize: 13,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
             ),
             textAlign: TextAlign.center,
           ),
@@ -227,7 +228,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               mostrarModalConfirmacao(context);
             },
             style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 240, 238, 239),
+              primary: Theme.of(context).primaryColorLight,
               onPrimary: Colors.black,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
@@ -236,7 +237,8 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             child: const Text(
               'Adicionar ao Carrinho',
               style: TextStyle(
-                fontSize: 12.0, // Defina o tamanho da fonte desejado),
+                fontSize: 12.0, 
+                fontWeight: FontWeight.bold// Defina o tamanho da fonte desejado),
               ),
             ),
           ),
@@ -256,7 +258,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           mainAxisAlignment:
               MainAxisAlignment.start, // Alinha os itens à esquerda
           children: [
-            construirCategoriaDeProdutos(index: 0, nome: "Todos os Produtos"),
+            construirCategoriaDeProdutos(index: 0, nome: "Ver todos"),
             construirCategoriaDeProdutos(index: 1, nome: "Gamer"),
             construirCategoriaDeProdutos(index: 2, nome: "Rede"),
             construirCategoriaDeProdutos(index: 3, nome: "Hardware"),
