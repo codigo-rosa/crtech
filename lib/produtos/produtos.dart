@@ -3,7 +3,7 @@ class Produtos {
   final String nome;
   final String imagem;
   final String descricao;
-  final String preco;
+  final double preco;
   int quantidade;
 
   Produtos(
