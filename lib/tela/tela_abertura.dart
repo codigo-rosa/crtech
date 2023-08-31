@@ -5,17 +5,17 @@ class TelaAbertura extends StatefulWidget {
   const TelaAbertura({super.key});
 
   @override
-  _TelaAberturaState createState() => _TelaAberturaState();
+  TelaAberturaState createState() => TelaAberturaState();
 }
 
-class _TelaAberturaState extends State<TelaAbertura> {
+class TelaAberturaState extends State<TelaAbertura> {
   @override
   void initState() {
     super.initState();
-    // Simulando um atraso de carregamento, você pode substituir isso com a lógica real
     Future.delayed(const Duration(seconds: 3), () {
-      // Navegue para a próxima tela após o carregamento
+      // Aguarda um atraso de 3 segundos utilizando o `Future.delayed`
       Navigator.pushReplacement(
+        // Utiliza o `Navigator.pushReplacement` para substituir esta tela.
         context,
         MaterialPageRoute(
           builder: (context) => const PaginaPrincipal(carrinho: []),
@@ -24,16 +24,15 @@ class _TelaAberturaState extends State<TelaAbertura> {
     });
   }
 
-  @override
+  @override // Exibe a imagem do logotipo com as dimensões definidas
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.transparent, // Define a cor de fundo como transparente
+      backgroundColor: Colors.transparent,
       body: Container(
-        color: Colors.white, // Cor de fundo do Container
+        color: Colors.white,
         child: Center(
           child: Image.asset(
-            'assets/logo/logo.jpg', // Caminho da imagem
+            'assets/logo/logo.jpg',
             width: 120.0,
             height: 120.0,
           ),

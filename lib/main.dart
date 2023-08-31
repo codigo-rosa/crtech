@@ -1,26 +1,30 @@
-import 'package:crtech/tela/telaPerfil.dart';
-import 'package:crtech/tela/telaAbertura.dart';
-import 'package:crtech/tela/telaCarrinho.dart';
-
+import 'package:crtech/tela/tela_perfil.dart';
+import 'package:crtech/tela/tela_abertura.dart';
 import 'package:flutter/material.dart';
 import 'package:crtech/produtos/produtos.dart';
-import 'package:crtech/produtos/meusProdutos.dart';
+import 'package:crtech/tela/tela_carrinho.dart';
+import 'package:crtech/produtos/meus_produtos.dart';
+import 'package:intl/intl.dart';
 
 void main() {
-  runApp(Aplicativo());
+  runApp(const Aplicativo());
 }
 
 class Aplicativo extends StatelessWidget {
+  // Classe principal do aplicativo
+  const Aplicativo({super.key});
+
   @override
   Widget build(BuildContext context) {
+    // Método para construir a estrutura do aplicativo
     return MaterialApp(
       title: 'CR Tech',
-      debugShowCheckedModeBanner: false, // Remover o banner de debug
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        //borderRadius: BorderRadius.circular(8),
       ),
-      home: const TelaAbertura(),
+      home:
+          const TelaAbertura(), // Define a tela inicial como a classe TelaAbertura
     );
   }
 }
@@ -29,29 +33,35 @@ class PaginaPrincipal extends StatefulWidget {
   final List<Produtos> carrinho;
 
   const PaginaPrincipal({Key? key, required this.carrinho}) : super(key: key);
-
+  // Construtor da classe que recebe a lista 'carrinho' como parâmetro
   @override
   EstadoPaginaPrincipal createState() => EstadoPaginaPrincipal();
-}
+} // Retorna uma instância do EstadoPaginaPrincipal ao construir o estado deste widget
 
 class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
-  int isSelected = 0;
+  // Classe que gerencia o estado da PaginaPrincipal
+
+  int isSelected = 0; // Variável para controlar o item selecionado
   String searchText = ""; // Variável para armazenar o texto de busca
-  List<Produtos> listaDeProdutos = MeusProdutos.todosProdutos;
+  List<Produtos> listaDeProdutos = MeusProdutos
+      .todosProdutos; // Lista de todos os produtos disponíveis, vinda da classe MeusProdutos
   List<Produtos> produtosFiltrados =
-      []; // Lista para armazenar produtos filtrados
-  List<Produtos> carrinho = []; // Declarar a lista carrinho aqui
+      []; //Lista para armazenar os produtos após aplicar um filtro de busca
+  List<Produtos> carrinho =
+      []; // Lista que armazenará os produtos selecionados para o carrinho de compras
 
   @override
   Widget build(BuildContext context) {
-    //TEXTOOO
-    // Filtrar a lista de produtos com base no texto de busca
+    // Método de construção da interface da página
+
+    // Filtrar a lista de produtos com base no texto de busca e armazena na lista 'produtosFiltrados'
     produtosFiltrados = listaDeProdutos.where((produtos) {
       return produtos.descricao
           .toLowerCase()
           .contains(searchText.toLowerCase());
     }).toList();
 
+    //aqui vamos exibir a imagem no topo
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 215.0,
@@ -61,12 +71,13 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/logo/logo.jpg', // Caminho da imagem
+              'assets/logo/logo.jpg',
               width: 80.0,
               height: 80.0,
             ),
 
             const Align(
+              //aqui criamos um layout alinhado à esquerda com dois textos formatados.
               alignment: Alignment.centerLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,11 +92,11 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 2.0), // Espaçamento entre os textos
+                  SizedBox(height: 2.0),
                   Padding(
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      'o que está procurando hoje?',
+                      'O que está procurando hoje?',
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -95,20 +106,23 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 ],
               ),
             ),
+
+            // Container que envolve uma linha contendo um campo de texto para pesquisa.
             Container(
-              color: Color.fromRGBO(255, 255, 255, 1), // Cor de fundo da barra
+              color: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Container(
-                      color: Color.fromARGB(255, 249, 247, 247),
+                      color: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: TextField(
                         onChanged: (text) {
                           setState(() {
-                            searchText = text;
+                            searchText =
+                                text; // Atualiza o texto de busca conforme o usuário digita
                           });
                         },
                         decoration: InputDecoration(
@@ -127,10 +141,12 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 ],
               ),
             ),
-            const SizedBox(height: 4.0), // Espaço abaixo da barra de busca
+            const SizedBox(height: 4.0),
           ],
         ),
       ),
+
+      // Isso cria uma barra de navegação inferior com ícones de navegação
       bottomNavigationBar: BottomAppBar(
         color: Colors.pink,
         child: SizedBox(
@@ -141,10 +157,12 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
               IconButton(
                 icon: const Icon(Icons.home,
                     color: Color.fromARGB(255, 10, 10, 10)),
-                onPressed: () {},
+                onPressed:
+                    () {}, // Lógica ao pressionar o ícone de casa (não fizemos)
               ),
               IconButton(
-                icon: const Icon(Icons.shopping_cart,
+                icon: const Icon(
+                    Icons.shopping_cart, // Ícone de carrinho de compras
                     color: Color.fromARGB(255, 10, 10, 10)),
                 onPressed: () {
                   Navigator.push(
@@ -156,14 +174,15 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.person,
+                icon: const Icon(Icons.person, // Ícone de perfil
                     color: Color.fromARGB(255, 10, 10, 10)),
                 onPressed: () {
                   // Lógica ao pressionar o ícone de perfil
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TelaPerfil(),
+                      builder: (context) =>
+                          TelaPerfil(), // Navega para a tela de perfil
                     ),
                   );
                 },
@@ -171,14 +190,16 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             ],
           ),
         ),
-      ), //CATEGORIAS
+      ),
+      // Corpo da tela, composto por uma coluna que contém as categorias e os produtos exibidos
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
         child: Column(
           children: [
-            construirCategoriasDeProdutos(), //FUNCAO
+            construirCategoriasDeProdutos(), // Chamada de função para construir categorias de produtos
             Expanded(
-              child: construirProdutosExibidos(),
+              child:
+                  construirProdutosExibidos(), // Chamada de função para construir produtos exibidos
             ),
           ],
         ),
@@ -186,6 +207,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
     );
   }
 
+// Função para construir o card de um produto
   Widget construirCardDeProdutos(Produtos produtos) {
     return Card(
       child: Column(
@@ -194,22 +216,20 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           Expanded(
             child: Image.asset(
               produtos.imagem,
-              //fit: BoxFit.contain,
             ),
           ),
-          //const SizedBox(height: 10),
           Text(
             produtos.descricao,
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontSize: 13,
-              fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
+          // Descrição do produto com estilo definido
           const SizedBox(height: 5),
           Text(
-            produtos.preco,
+            'R\$ ${NumberFormat.currency(locale: 'pt_BR', symbol: '').format(produtos.preco)}',
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontSize: 13,
@@ -218,14 +238,17 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             ),
             textAlign: TextAlign.center,
           ),
+          // Preço do produto formatado com estilo definido
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {
               setState(() {
-                carrinho.add(produtos); // Adicionar o produto ao carrinho
+                carrinho.add(produtos);
               });
-              mostrarModalConfirmacao(context);
+              mostrarModalConfirmacao(
+                  context); // Mostrar um modal de confirmação
             },
+            // Botão "Adicionar ao Carrinho" com estilo definido
             style: ElevatedButton.styleFrom(
               primary: Color.fromARGB(255, 240, 238, 239),
               onPrimary: Colors.black,
@@ -236,7 +259,8 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             child: const Text(
               'Adicionar ao Carrinho',
               style: TextStyle(
-                fontSize: 12.0, // Defina o tamanho da fonte desejado),
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -245,18 +269,39 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
     );
   }
 
+// Função que mostra um modal de confirmação quando um produto é adicionado ao carrinho
+  void mostrarModalConfirmacao(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text('Produto adicionado ao carrinho.'),
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Fechar o modal
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Função para construir a seção de categorias de produtos
   Widget construirCategoriasDeProdutos() {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      width: double.infinity, // Para ocupar a largura total da tela
+      width: double.infinity,
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.horizontal, // Rolamento horizontal das categorias
         child: Row(
-          mainAxisAlignment:
-              MainAxisAlignment.start, // Alinha os itens à esquerda
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            construirCategoriaDeProdutos(index: 0, nome: "Todos os Produtos"),
+            // Chamada de função para construir categorias na parte superior da tela
+            construirCategoriaDeProdutos(index: 0, nome: "Ver tudo"),
             construirCategoriaDeProdutos(index: 1, nome: "Gamer"),
             construirCategoriaDeProdutos(index: 2, nome: "Rede"),
             construirCategoriaDeProdutos(index: 3, nome: "Hardware"),
@@ -267,14 +312,15 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   }
 
   Widget construirCategoriaDeProdutos({
-    required int index,
+    required int index, //passar informações para a função quando ela é chamada.
     required String nome,
   }) {
     return GestureDetector(
+      // Função para construir uma categoria de produtos individual, atualiza a categoria selecionada
       onTap: () {
         setState(() {
-          isSelected = index;
-          searchText = "";
+          isSelected = index; // Define a categoria selecionada
+          searchText = ""; // Limpa o texto de busca
         });
       },
       child: Container(
@@ -295,9 +341,9 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
     );
   }
 
+// Define a lista de produtos a ser exibida com base na categoria selecionada
   Widget construirProdutosExibidos() {
     List<Produtos> produtosExibidos;
-
     if (isSelected == 0) {
       produtosExibidos = produtosFiltrados;
     } else if (isSelected == 1) {
@@ -310,6 +356,7 @@ class EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       produtosExibidos = [];
     }
 
+    // Constrói uma grade de produtos na parte principal da tela
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,

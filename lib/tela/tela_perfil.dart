@@ -1,29 +1,25 @@
 import 'package:crtech/main.dart';
-//import 'package:ecommerce_app/pages/TelaHome.dart';
 import 'package:flutter/material.dart';
 
 class TelaPerfil extends StatelessWidget {
-  // Declaração dos controladores para os campos de texto
+// Declaração dos controladores para os campos de texto
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
+  TelaPerfil({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // Obtém as dimensões da tela
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
-        title: Text('Retornar para página principal'),
+        title: const Text('Retornar para página inicial'),
       ),
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Fundo gradiente
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Color.fromRGBO(253, 207, 230, 1),
@@ -34,39 +30,38 @@ class TelaPerfil extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Imagem do perfil
-                  Container(
-                    child: CircleAvatar(
-                      radius: 55,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage('logo/perfil.png'),
-                    ),
+                  const CircleAvatar(
+                    radius: 55,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: AssetImage('logo/perfil.png'),
                   ),
-                  SizedBox(height: 40), // Espaço entre a imagem e as barras
+                  const SizedBox(
+                      height: 40), // Espaço entre a imagem e as barras
                   // Campo de texto para o nome do usuário
                   TextFormField(
                     controller: nomeController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Nome do Usuário',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 20), // Espaço entre os campos
+                  const SizedBox(height: 20), // Espaço entre os campos
                   // Campo de texto para o e-mail
                   TextFormField(
                     controller: emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
+                    decoration: const InputDecoration(
+                      labelText: 'E-mail',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 40), // Espaço entre os campos e o botão
+                  const SizedBox(
+                      height: 40), // Espaço entre os campos e o botão
                   // Botão "Entrar"
                   ElevatedButton(
                     onPressed: () {
@@ -85,14 +80,13 @@ class TelaPerfil extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                Aplicativo()), // Substitua "HomePage" pela classe da sua página principal
+                            builder: (context) => const Aplicativo()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 13, 13, 13), // Cor do botão
+                      backgroundColor: const Color.fromARGB(255, 13, 13, 13),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Entrar',
                       style: TextStyle(
                         color: Colors.white,
@@ -108,9 +102,8 @@ class TelaPerfil extends StatelessWidget {
     );
   }
 
-  // Método para enviar os dados (pode ser personalizado conforme sua necessidade)
   void enviarDados(String nome, String email) {
-    // Lógica para enviar os dados para algum lugar (exemplo: imprimir no console)
+    // Lógica para enviar os dados para o console
     print('Nome: $nome');
     print('Email: $email');
   }

@@ -1,5 +1,5 @@
-import 'package:crtech/produtos/meusProdutos.dart';
-import 'package:crtech/produtos/produtoCard.dart';
+import 'package:crtech/produtos/meus_produtos.dart';
+import 'package:crtech/produtos/produto_card.dart';
 import 'package:flutter/material.dart';
 
 class TelaHome extends StatefulWidget {
@@ -17,13 +17,6 @@ class EstadoTelaHome extends State<TelaHome> {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          const Text(
-            "Nossos Produtos",
-            style: TextStyle(
-              fontSize: 27,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -50,6 +43,7 @@ class EstadoTelaHome extends State<TelaHome> {
     );
   }
 
+  // Constrói os botões de categorias de produtos
   construirCategoriasDeProdutos({required int index, required String nome}) =>
       GestureDetector(
         onTap: () => setState(
@@ -61,8 +55,8 @@ class EstadoTelaHome extends State<TelaHome> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: isSelected == index
-                  ? Color.fromARGB(255, 252, 251, 255)
-                  : Color.fromARGB(255, 26, 6, 62),
+                  ? const Color.fromARGB(255, 252, 251, 255)
+                  : const Color.fromARGB(255, 26, 6, 62),
               borderRadius: BorderRadius.circular(8)),
           child: Text(
             nome,
@@ -70,7 +64,7 @@ class EstadoTelaHome extends State<TelaHome> {
           ),
         ),
       );
-
+// Constrói a grade de todos os produtos
   construirTodosOsProdutos() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -86,6 +80,7 @@ class EstadoTelaHome extends State<TelaHome> {
         },
       );
 
+  // Constrói a grade de produtos da categoria Gamer
   construirGamer() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
@@ -100,7 +95,7 @@ class EstadoTelaHome extends State<TelaHome> {
           return ProdutoCard(produtos: listaGamer);
         },
       );
-
+  // Constrói a grade de produtos da categoria Hardwar
   construirHardware() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
@@ -115,7 +110,7 @@ class EstadoTelaHome extends State<TelaHome> {
           return ProdutoCard(produtos: listaDeHardware);
         },
       );
-
+  // Constrói a grade de produtos da categoria Rede
   construirRede() => GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,

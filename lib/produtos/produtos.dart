@@ -3,7 +3,7 @@ class Produtos {
   final String nome;
   final String imagem;
   final String descricao;
-  final String preco;
+  final double preco;
   int quantidade;
 
   Produtos(
@@ -14,4 +14,3 @@ class Produtos {
       required this.imagem,
       required this.quantidade});
 }
-//Faltou implementar quantidade no carrinho e id
