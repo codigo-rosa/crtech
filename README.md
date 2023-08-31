@@ -5,7 +5,7 @@
 <h1 align="center"> CRTech </h1>
 
 # Task Hackadev 
-Programa TODAS TECH junto ã Imã Tech:
+Programa TODAS TECH junto à Imã Tech:
 - A criação do Front-End (Flutter) de um e-commerce mobile focado em produtos de tecnologia.
 
 # Atividades
