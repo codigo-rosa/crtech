@@ -1,3 +1,9 @@
+ <p align="center">
+
+ <img src="https://github.com/codigo-rosa/crtech/assets/142268843/43eb7779-b04b-4a3a-bb52-343c132d4bd8"/>
+
+</p>
+
 # ecommerce_app
 
 A new Flutter project.
