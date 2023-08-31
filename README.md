@@ -1,4 +1,9 @@
-https://github.com/codigo-rosa/crtech/assets/142268843/63fe3e16-89d2-4dd5-b362-c1bea54cafa4
+ <p align="center">
+
+ <img src="https://github.com/codigo-rosa/crtech/assets/142268843/63fe3e16-89d2-4dd5-b362-c1bea54cafa4"/>
+
+</p>
+
 
 # ecommerce_app
 
