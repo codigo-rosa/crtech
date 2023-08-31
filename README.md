@@ -3,10 +3,12 @@
 </p>
 
 <h1 align="center"> CRTech </h1>
-Task Hackadev do progrma TODAS TECH junto ã Imã Tech, na criação do Front-End (Flutter) de um e-commerce.
-E-commerce mobile focado em produtos de tecnologia.
 
-#Atividadedes
+# Task Hackadev 
+Programa TODAS TECH junto ã Imã Tech:
+- A criação do Front-End (Flutter) de um e-commerce mobile focado em produtos de tecnologia.
+
+# Atividades
 1. Criação de tela - Home do Ecommerce.
 2. Listar 3 categorias principais [Eletroeletrônicos, SmarthPhones e SmartTVs)
 3. Listagem de produtos.
