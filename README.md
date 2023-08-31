@@ -1,16 +1,17 @@
-# ecommerce_app
+ <p align="center">
+ <img src="https://github.com/codigo-rosa/crtech/assets/142268843/43eb7779-b04b-4a3a-bb52-343c132d4bd8"/>
+</p>
 
-A new Flutter project.
+<h1 align="center"> CRTech </h1>
 
-## Getting Started
+# Task Hackadev 
+Programa TODAS TECH junto à Imã Tech:
+- A criação do Front-End (Flutter) de um e-commerce mobile focado em produtos de tecnologia.
 
-This project is a starting point for a Flutter application.
+# Atividades
+1. Criação de tela - Home do Ecommerce.
+2. Listar 3 categorias principais [Eletroeletrônicos, SmarthPhones e SmartTVs)
+3. Listagem de produtos.
+4. Menu de navegação(Tab Navigation Bottom)
+   
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
