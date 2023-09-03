@@ -4,6 +4,7 @@ class Produtos {
   final String imagem;
   final String descricao;
   final double preco;
+
   int quantidade;
 
   Produtos(

@@ -1,5 +1,6 @@
 import 'package:crtech/main.dart';
 import 'package:flutter/material.dart';
+import 'package:crtech/tela/carrrossel.dart';
 
 class TelaPerfil extends StatelessWidget {
 // Declaração dos controladores para os campos de texto
@@ -10,6 +11,12 @@ class TelaPerfil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Navega para a tela Carrossel automaticamente quando a tela for construída
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => Carrossel()),
+    // );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
@@ -41,6 +48,7 @@ class TelaPerfil extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     backgroundImage: AssetImage('logo/perfil.png'),
                   ),
+
                   const SizedBox(
                       height: 40), // Espaço entre a imagem e as barras
                   // Campo de texto para o nome do usuário
@@ -60,6 +68,7 @@ class TelaPerfil extends StatelessWidget {
                       border: OutlineInputBorder(),
                     ),
                   ),
+
                   const SizedBox(
                       height: 40), // Espaço entre os campos e o botão
                   // Botão "Entrar"
