@@ -3,8 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class Carrossel extends StatelessWidget {
   final List<String> imageList = [
-    "assets/banner.png",
-    //"assets/banner.png",
+    "assets/cr.jpg",
   ];
 
   Carrossel({Key? key}) : super(key: key);
@@ -13,7 +12,8 @@ class Carrossel extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 60, // Defina a altura desejada para suas imagens
+        height:
+            50, // Ajuste a altura de acordo com a dimensão original da imagem
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 3),
         enlargeCenterPage: false,
@@ -24,11 +24,11 @@ class Carrossel extends StatelessWidget {
             return Container(
               width: double.infinity,
               margin: EdgeInsets.symmetric(horizontal: 1.0),
-              child: Image.network(
+              child: Image.asset(
                 image,
-                width: double.infinity, // Largura da imagem
+                width: double.infinity,
                 fit: BoxFit
-                    .cover, // Mantém a proporção da imagem e preenche o espaço
+                    .contain, // Use BoxFit.contain para manter a qualidade
               ),
             );
           },

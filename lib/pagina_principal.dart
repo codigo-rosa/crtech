@@ -46,7 +46,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
         child: Column(
           children: [
-            //Carrossel(), // Adicione o carrossel aqui
+            Carrossel(), // Adicione o carrossel aqui
             construirCategoriasDeProdutos(),
             Expanded(
               child: construirProdutosExibidos(),
