@@ -1,3 +1,4 @@
+import 'package:crtech/detalhes_produto.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:crtech/appBar.dart';
@@ -6,7 +7,6 @@ import 'package:crtech/produtos/meus_produtos.dart';
 import 'package:crtech/produtos/produtos.dart';
 import 'package:crtech/tela/carrrossel.dart';
 import 'package:crtech/tela/tela_carrinho.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PaginaPrincipal extends StatefulWidget {
   final List<Produtos> carrinho;
@@ -46,7 +46,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
         child: Column(
           children: [
-            Carrossel(), // Adicione o carrossel aqui
+            //Carrossel(), // Adicione o carrossel aqui
             construirCategoriasDeProdutos(),
             Expanded(
               child: construirProdutosExibidos(),
@@ -66,7 +66,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
     );
   }
 
-  Widget construirCardDeProdutos(Produtos produtos, int index) {
+  Widget construirCardDeProdutos(Produtos produtos, int index, int id) {
     double _rating = 0.0;
 
     return Card(
@@ -74,8 +74,21 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: Image.asset(
-              produtos.imagem,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetalhesProdutoMaior(
+                      produto: produtos,
+                      todosProdutos: [],
+                    ),
+                  ),
+                );
+              },
+              child: Image.asset(
+                produtos.imagem,
+              ),
             ),
           ),
           Text(
@@ -131,25 +144,6 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 favoritos[index] = !favoritos[index];
               });
             },
-          ),
-          // Ícone de estrela para avaliação
-          RatingBar.builder(
-            initialRating: _rating,
-            minRating: 1,
-            direction: Axis.horizontal,
-            allowHalfRating: true,
-            itemCount: 5,
-            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder: (context, _) => Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            onRatingUpdate: (rating) {
-              setState(() {
-                _rating = rating;
-              });
-            },
-            itemSize: 7, // Tamanho desejado das estrelas
           ),
         ],
       ),
@@ -255,7 +249,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       itemCount: produtosExibidos.length,
       itemBuilder: (context, index) {
         final produtos = produtosExibidos[index];
-        return construirCardDeProdutos(produtos, index);
+        return construirCardDeProdutos(produtos, index, produtos.id);
       },
     );
   }

@@ -1,73 +1,145 @@
-// import 'package:flutter/material.dart';
-// import 'package:crtech/produtos/produtos.dart';
+import 'package:crtech/produtos/produtos.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:crtech/produtos/produtos.dart';
+import 'package:crtech/produtos/meus_produtos.dart';
 
-// class CategoriaProdutosScreen extends StatelessWidget {
-//   final String categoria;
-//   final List<Produtos> todosProdutos;
+class DetalhesProdutoMaior extends StatefulWidget {
+  final Produtos produto;
+  final List<Produtos> todosProdutos;
 
-//   CategoriaProdutosScreen({required this.categoria, required this.todosProdutos});
+  DetalhesProdutoMaior({
+    required this.produto,
+    required this.todosProdutos,
+  });
 
-//   List<Produtos> getProdutosPorCategoria() {
-//     // Filtrar os produtos com base na categoria desejada
-//     return todosProdutos.where((produto) => produto.categoria == categoria).toList();
-//   }
+  @override
+  _DetalhesProdutoMaiorState createState() => _DetalhesProdutoMaiorState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final produtosDaCategoria = getProdutosPorCategoria();
+class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
+  double _rating = 0.0;
+  TextEditingController _commentController = TextEditingController();
+  bool _comentarioEnviado = false;
+  List<Produtos> produtosSugeridos = [];
 
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Produtos da Categoria: $categoria'),
-//       ),
-//       body: ListView.builder(
-//         itemCount: produtosDaCategoria.length,
-//         itemBuilder: (context, index) {
-//           final produto = produtosDaCategoria[index];
-//           return ListTile(
-//             leading: Image.asset(produto.imagem),
-//             title: Text(produto.nome),
-//             subtitle: Text('Preço: R\$ ${produto.preco.toStringAsFixed(2)}'),
-//             onTap: () {
-//               // Ao tocar em um produto, você pode navegar para a página de detalhes ou fazer o que desejar.
-//               // Por exemplo, você pode usar Navigator para navegar para a página de detalhes do produto.
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                   builder: (context) => DetalhesProduto(produto: produto),
-//                 ),
-//               );
-//             },
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
+  @override
+  void initState() {
+    super.initState();
 
-// class DetalhesProduto extends StatelessWidget {
-//   final Produtos produto;
+    // Encontre produtos relacionados com base no ID do produto atual
+    produtosSugeridos = widget.todosProdutos
+        .where((produto) => produto.id != widget.produto.id)
+        .toList();
+  }
 
-//   DetalhesProduto({required this.produto});
+  @override
+  void _enviarComentario() {
+    final comentario = _commentController.text;
+    print('Comentário enviado pelo cliente: $comentario');
+    setState(() {
+      _comentarioEnviado = true;
+    });
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(produto.nome),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Image.asset(produto.imagem),
-//             Text('Nome: ${produto.nome}'),
-//             Text('Preço: R\$ ${produto.preco.toStringAsFixed(2)}'),
-//             Text('Descrição: ${produto.descricao}'),
-//             // Adicione outras informações do produto aqui
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.produto.nome),
+      ),
+      body: ListView(
+        children: [
+          // Exiba a imagem em tamanho menor
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Image.asset(
+              widget.produto.imagem,
+              width: 150, // Defina o tamanho desejado
+              height: 150,
+            ),
+          ),
+          Text('Nome: ${widget.produto.nome}'),
+          Text('Preço: R\$ ${widget.produto.preco.toStringAsFixed(2)}'),
+          Text('Descrição: ${widget.produto.descricao}'),
+
+          // Ícone de estrela para avaliação
+          RatingBar.builder(
+            initialRating: 0,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (rating) {
+              setState(() {
+                _rating = rating;
+              });
+            },
+          ),
+
+          // Espaço para comentário
+          _comentarioEnviado
+              ? SizedBox.shrink() // Oculta o espaço do comentário após o envio
+              : Column(
+                  children: [
+                    TextField(
+                      controller: _commentController,
+                      decoration: InputDecoration(
+                        labelText: 'Comentário',
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _enviarComentario(); // Chama o método para enviar o comentário
+                      },
+                      child: Text('Enviar Comentário'),
+                    ),
+                  ],
+                ),
+
+          // Espaço para sugestões de produtos
+          SizedBox(height: 20.0),
+          Text(
+            'Sugestões de Produtos',
+            style: TextStyle(fontSize: 18),
+          ),
+          // Lista de produtos sugeridos
+          Column(
+            children: produtosSugeridos.map((produto) {
+              return ListTile(
+                leading: Image.asset(
+                  produto.imagem,
+                  width: 50,
+                  height: 50,
+                ),
+                title: Text(produto.nome),
+                onTap: () {
+                  // Navegue para a página de detalhes deste produto
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DetalhesProdutoMaior(
+                        produto: produto,
+                        todosProdutos: widget.todosProdutos,
+                      ),
+                    ),
+                  );
+                },
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
+  }
+}
