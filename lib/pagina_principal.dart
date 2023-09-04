@@ -6,6 +6,7 @@ import 'package:crtech/produtos/meus_produtos.dart';
 import 'package:crtech/produtos/produtos.dart';
 import 'package:crtech/tela/carrrossel.dart';
 import 'package:crtech/tela/tela_carrinho.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PaginaPrincipal extends StatefulWidget {
   final List<Produtos> carrinho;
@@ -66,6 +67,8 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   }
 
   Widget construirCardDeProdutos(Produtos produtos, int index) {
+    double _rating = 0.0;
+
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -128,6 +131,25 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 favoritos[index] = !favoritos[index];
               });
             },
+          ),
+          // Ícone de estrela para avaliação
+          RatingBar.builder(
+            initialRating: _rating,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (rating) {
+              setState(() {
+                _rating = rating;
+              });
+            },
+            itemSize: 7, // Tamanho desejado das estrelas
           ),
         ],
       ),
