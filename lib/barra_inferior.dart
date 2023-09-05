@@ -1,4 +1,3 @@
-import 'package:crtech/avaliacao_cliente.dart';
 import 'package:crtech/tela/tela_perfil.dart';
 import 'package:flutter/material.dart';
 
