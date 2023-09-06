@@ -147,7 +147,7 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
                 'Seu carrinho está vazio!',
                 style: TextStyle(
                   fontSize: 24,
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.black,
                   fontWeight: FontWeight.w100,
                 ),
                 textAlign: TextAlign.center,
@@ -200,6 +200,7 @@ class TelaCarrinhoState extends State<TelaCarrinho> {
           }
         },
         child: const Icon(Icons.payment), // Ícone para "Comprar"
+        backgroundColor: Colors.pink,
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),

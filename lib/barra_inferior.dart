@@ -52,25 +52,21 @@ class CustomBottomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () => onTabSelected(0),
-            color: selectedIndex == 0 ? Colors.blue : Colors.grey,
-          ),
+              icon: Icon(Icons.home),
+              onPressed: () => onTabSelected(0),
+              color: Colors.pink),
           IconButton(
-            icon: Icon(Icons.favorite), // Ícone de coração
-            onPressed: () =>
-                _openFavoritesPage(context), // Abre a página de favoritos
-            color: selectedIndex == 1 ? Colors.blue : Colors.grey,
-          ),
+              icon: Icon(Icons.favorite), // Ícone de coração
+              onPressed: () =>
+                  _openFavoritesPage(context), // Abre a página de favoritos
+              color: Colors.pink),
           IconButton(
-            icon: Icon(Icons.person), // Ícone de perfil do usuário
-            onPressed: () =>
-                _openProfilePage(context), // Abre a página de perfil
-            color: selectedIndex == 2
-                ? Colors.blue
-                : Colors
-                    .grey, // Altere o ícone ativo/inativo conforme necessário
-          ),
+              icon: Icon(Icons.person), // Ícone de perfil do usuário
+              onPressed: () =>
+                  _openProfilePage(context), // Abre a página de perfil
+              color: Colors
+                  .pink // Altere o ícone ativo/inativo conforme necessário
+              ),
         ],
       ),
     );
@@ -90,6 +86,7 @@ class FavoritosPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Produtos Favoritos'),
+        backgroundColor: Colors.pink,
       ),
       body: ListView.builder(
         itemCount: favoritos.length,
