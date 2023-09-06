@@ -47,6 +47,7 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.produto.nome),
+        backgroundColor: Colors.pink, // Cor AppBar
       ),
       body: ListView(
         children: [
@@ -97,6 +98,10 @@ class _DetalhesProdutoMaiorState extends State<DetalhesProdutoMaior> {
                       onPressed: () {
                         _enviarComentario(); // Chama o método para enviar o comentário
                       },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors
+                            .pink, // Cor Botão Comentário
+                      ),
                       child: Text('Enviar Comentário'),
                     ),
                   ],

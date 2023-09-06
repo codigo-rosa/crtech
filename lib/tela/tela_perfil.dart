@@ -93,7 +93,7 @@ class TelaPerfil extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 13, 13, 13),
+                      backgroundColor: Colors.pink,
                     ),
                     child: const Text(
                       'Entrar',

@@ -27,32 +27,43 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onCartPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TelaCarrinho(carrinho: carrinho),
+      body: Column(
+        children: [
+          // Carrossel
+          Carrossel(),
+
+          // AppBar
+          CustomAppBar(
+            onCartPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TelaCarrinho(carrinho: carrinho),
+                ),
+              );
+            },
+            onSearchChanged: (text) {
+              setState(() {
+                searchText = text;
+              });
+            },
+          ),
+
+          // Conteúdo principal
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 20.0),
+              child: Column(
+                children: [
+                  construirCategoriasDeProdutos(),
+                  Expanded(
+                    child: construirProdutosExibidos(),
+                  ),
+                ],
+              ),
             ),
-          );
-        },
-        onSearchChanged: (text) {
-          setState(() {
-            searchText = text;
-          });
-        },
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 20.0),
-        child: Column(
-          children: [
-            Carrossel(), // Adicione o carrossel aqui
-            construirCategoriasDeProdutos(),
-            Expanded(
-              child: construirProdutosExibidos(),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: CustomBottomAppBar(
         onTabSelected: (index) {
@@ -73,6 +84,39 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Ícone de coração para favoritar
+              IconButton(
+                iconSize: 18.5, // Tamanho do ícone
+                icon: Icon(
+                  favoritos[index] ? Icons.favorite : Icons.favorite_border,
+                  color: Color.fromARGB(
+                      255, 231, 130, 164), 
+                ),
+                onPressed: () {
+                  setState(() {
+                    favoritos[index] = !favoritos[index];
+                  });
+                },
+              ),
+              // Ícone de carrinho para adicionar ao carrinho
+              IconButton(
+                iconSize: 18.5, // Tamanho do ícone
+                icon: Icon(
+                  Icons.add_shopping_cart_sharp,
+                  color: Colors.black, // Cor do ícone de carrinho
+                ),
+                onPressed: () {
+                  setState(() {
+                    carrinho.add(produtos);
+                  });
+                  mostrarModalConfirmacao(context);
+                },
+              ),
+            ],
+          ),
           Expanded(
             child: GestureDetector(
               onTap: () {
@@ -111,40 +155,6 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                carrinho.add(produtos);
-              });
-              mostrarModalConfirmacao(context);
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 240, 238, 239),
-              onPrimary: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            child: const Text(
-              'Adicionar ao Carrinho',
-              style: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          // Ícone de coração para favoritar
-          IconButton(
-            icon: Icon(
-              favoritos[index] ? Icons.favorite : Icons.favorite_border,
-              color: Colors.red, // Cor do ícone de coração
-            ),
-            onPressed: () {
-              setState(() {
-                favoritos[index] = !favoritos[index];
-              });
-            },
-          ),
         ],
       ),
     );
